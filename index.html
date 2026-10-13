@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CandraTV</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #080d13;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 15px;
+  background: #101720;
+  border-bottom: 2px solid #d4af37;
+}
+
+.logo {
+  color: #ffd34e;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.search {
+  width: 48%;
+  padding: 11px;
+  border-radius: 20px;
+  border: 1px solid #394352;
+  background: #1c2634;
+  color: white;
+  min-width: 0;
+}
+
+.banner {
+  margin: 15px;
+  min-height: 240px;
+  padding: 25px 18px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, #070b12 5%, #070b12cc 45%, transparent),
+    url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200")
+    center/cover;
+}
+
+.banner h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.banner p {
+  color: #ddd;
+  line-height: 1.5;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+.watch {
+  background: #ffd34e;
+  color: #111;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 12px 18px;
+}
+
+h2 {
+  margin: 24px 15px 5px;
+}
+
+.subtitle {
+  margin: 0 15px 18px;
+  color: #b5c0ce;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: 15px;
+}
+
+.card {
+  position: relative;
+  height: 245px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #3a4552;
+  background: #202833;
+  cursor: pointer;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .3s;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 25% 0 0;
+  background: linear-gradient(transparent, #000e);
+}
+
+.card-info {
+  position: absolute;
+  z-index: 1;
+  bottom: 12px;
+  left: 12px;
+  right: 8px;
+}
+
+.card-info h3 {
+  font-size: 19px;
+  margin: 0 0 7px;
+}
+
+.card-info p {
+  font-size: 12px;
+  margin: 0;
+  color: #ddd;
+}
+
+#message {
+  padding: 15px;
+  color: #ffd34e;
+}
+
+footer {
+  text-align: center;
+  padding: 25px 10px;
+  color: #9ba7b7;
+  border-top: 1px solid #29313b;
+  margin-top: 20px;
+}
+
+@media (min-width: 700px) {
+  .categories {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .card {
+    height: 320px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">▶ CandraTV</div>
+  <input
+    class="search"
+    id="search"
+    type="search"
+    placeholder="🔍 Search..."
+    oninput="searchCategories()"
+  >
+</header>
+
+<section class="banner">
+  <div>
+    <h1>Welcome to<br>CandraTV</h1>
+    <p>Your entertainment world.<br>Discover stories for every mood.</p>
+    <button class="watch" onclick="goToCategories()">
+      ▶ Explore Now
+    </button>
+  </div>
+</section>
+
+<h2>🎬 Movie Categories</h2>
+<p class="subtitle">Choose your mood, find your movie.</p>
+
+<section class="categories" id="categories">
+
+  <article class="card" data-name="Love Story"
+    onclick="openCategory('Love Story')">
+    <img
+      src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600"
+      alt="Love story poster">
+    <div class="card-info">
+      <h3>💖 Love Story</h3>
+      <p>Some stories never end...</p>
+    </div>
+  </article>
+
+  <article class="card" data-name="Emotional"
+    onclick="openCategory('Emotional')">
+    <img
+      src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=600"
+      alt="Emotional movie poster">
+    <div class="card-info">
+      <h3>🥹 Emotional</h3>
+      <p>Feel every moment...</p>
+    </div>
+  </article>
+
+  <article class="card" data-name="Funny"
+    onclick="openCategory('Funny')">
+    <img
+      src="https://images.unsplash.com/photo-1527224857830-43a7acc85260?w=600"
+      alt="Funny category poster">
+    <div class="card-info">
+      <h3>😂 Funny</h3>
+      <p>Laugh more, live better...</p>
+    </div>
+  </article>
+
+  <article class="card" data-name="Horror"
+    onclick="openCategory('Horror')">
+    <img
+      src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=600"
+      alt="Horror category poster">
+    <div class="card-info">
+      <h3>👻 Horror</h3>
+      <p>Face your fears...</p>
+    </div>
+  </article>
+
+  <article class="card" data-name="Romantic"
+    onclick="openCategory('Romantic')">
+    <img
+      src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=600"
+      alt="Romantic category poster">
+    <div class="card-info">
+      <h3>🌹 Romantic</h3>
+      <p>Love is always a good idea...</p>
+    </div>
+  </article>
+
+  <article class="card" data-name="Business Development"
+    onclick="openCategory('Business Development')">
+    <img
+      src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600"
+      alt="Business development poster">
+    <div class="card-info">
+      <h3>💼 Business Development</h3>
+      <p>Learn. Grow. Succeed.</p>
+    </div>
+  </article>
+
+</section>
+
+<div id="message"></div>
+
+<footer>
+  © 2026 CandraTV
+  <p>Movies • Entertainment • Better Tomorrow</p>
+</footer>
+
+<script>
+function searchCategories() {
+  const query = document.getElementById("search")
+    .value.toLowerCase();
+
+  document.querySelectorAll(".card").forEach(card => {
+    const name = card.dataset.name.toLowerCase();
+    card.style.display = name.includes(query) ? "" : "none";
+  });
+}
+
+function goToCategories() {
+  document.getElementById("categories")
+    .scrollIntoView({ behavior: "smooth" });
+}
+
+function openCategory(name) {
+  document.getElementById("message").textContent =
+    name + " category selected! Movie listings will be added next.";
+}
+</script>
+
+</body>
+</html>
